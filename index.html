@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser Focus Detector</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            padding: 20px;
+            border-radius: 10px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .focused {
+            background-color: green;
+            color: white;
+        }
+
+        .not-focused {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="focus-status" class="not-focused">Browser window is not focused</h1>
+
+    <script>
+        const focusStatus = document.getElementById('focus-status');
+
+        function updateFocusStatus(isFocused) {
+            if (isFocused) {
+                focusStatus.textContent = 'Browser window is focused';
+                focusStatus.className = 'focused';
+            } else {
+                focusStatus.textContent = 'Browser window is not focused';
+                focusStatus.className = 'not-focused';
+            }
+        }
+
+        // Initial status check
+        updateFocusStatus(document.hasFocus());
+
+        // Event listeners for focus and blur
+        window.addEventListener('focus', () => updateFocusStatus(true));
+        window.addEventListener('blur', () => updateFocusStatus(false));
+    </script>
+</body>
+</html>
